@@ -3,244 +3,739 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>George Barrone | Portfolio</title>
+    <title>George Barrone — Developer & Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --bg-color: #0f172a; 
-            --card-bg: #1e293b;
-            --accent-blue: #7dd3fc; 
-            --text-main: #f8fafc;
-            --text-dim: #94a3b8;
+            --bg:        #0b0d12;
+            --surface:   #12151d;
+            --surface2:  #181c27;
+            --border:    rgba(255,255,255,0.07);
+            --gold:      #c9a84c;
+            --gold-dim:  rgba(201,168,76,0.15);
+            --gold-glow: rgba(201,168,76,0.35);
+            --text:      #e8e4da;
+            --muted:     #7a7a8a;
+            --radius:    14px;
         }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
+        /* ─── Noise overlay ─── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ─── Background glow ─── */
+        .bg-glow {
+            position: fixed;
+            top: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(ellipse, rgba(201,168,76,0.06) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ─── Header ─── */
         header {
-            background-color: #111827;
-            padding: 4rem 1rem 2rem;
+            position: relative;
+            z-index: 1;
+            padding: 80px 24px 60px;
             text-align: center;
-            border-bottom: 4px solid var(--accent-blue);
+            border-bottom: 1px solid var(--border);
         }
 
-        .profile-placeholder {
-            width: 160px;
-            height: 160px;
-            background-color: var(--card-bg);
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 2px;
+            background: var(--gold);
+        }
+
+        .avatar-wrap {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 28px;
+        }
+
+        .avatar-wrap::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
             border-radius: 50%;
-            margin: 0 auto 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--accent-blue);
-            font-weight: bold;
-            border: 3px dashed var(--accent-blue);
-            overflow: hidden;
+            background: conic-gradient(var(--gold), transparent 60%, var(--gold));
+            animation: spin 8s linear infinite;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .avatar-wrap img {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--bg);
+            background: var(--surface);
+            z-index: 1;
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #fff 0%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            font-size: 0.95rem;
+            font-weight: 300;
+            color: var(--muted);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 32px;
+        }
+
+        .tagline span {
+            color: var(--gold);
         }
 
         .social-links {
-            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
         }
 
         .social-links a {
-            color: var(--text-main);
-            font-size: 1.8rem;
-            margin: 0 15px;
-            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 22px;
+            border: 1px solid var(--border);
+            border-radius: 40px;
+            color: var(--text);
             text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            background: var(--surface);
+            transition: all 0.25s ease;
         }
 
         .social-links a:hover {
-            color: var(--accent-blue);
+            border-color: var(--gold);
+            color: var(--gold);
+            background: var(--gold-dim);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
         }
 
+        .social-links a i {
+            font-size: 1rem;
+        }
+
+        /* ─── Layout ─── */
         .container {
-            max-width: 850px;
-            margin: 0 auto 3rem;
-            padding: 0 1.5rem;
-        }
-
-        .summary-box {
-    text-align: center;
-    padding: 2rem 0;
-    color: var(--text-main); /* Changed from text-dim for better readability */
-    max-width: 700px;
-    margin: 0 auto;
-}
-
-.summary-box p {
-    margin-bottom: 1.5rem;
-    font-size: 1.1rem;
-}
-
-        h2 {
-            color: var(--accent-blue);
-            font-size: 1.8rem;
-            border-bottom: 1px solid #334155;
-            padding-bottom: 0.5rem;
-            margin-top: 3rem;
-        }
-
-        .card {
-            background-color: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 12px;
-            margin-bottom: 1.2rem;
             position: relative;
+            z-index: 1;
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
         }
 
-        .project-img {
-            width: 100%;
-            height: 180px;
-            background-color: #000;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            object-fit: cover;
+        /* ─── Section headers ─── */
+        .section-label {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 64px 0 28px;
         }
 
+        .section-label span {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .section-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .section-label .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--gold);
+            flex-shrink: 0;
+        }
+
+        /* ─── About ─── */
+        .about-text {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 32px 36px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-text::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--gold), transparent);
+        }
+
+        .about-text p {
+            font-size: 1.025rem;
+            font-weight: 300;
+            color: #c4bfb5;
+            margin-bottom: 16px;
+            line-height: 1.8;
+        }
+
+        .about-text p:last-child { margin-bottom: 0; }
+
+        .about-text strong {
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        /* ─── Education ─── */
+        .edu-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px 28px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+
+        .edu-card:hover {
+            border-color: rgba(201,168,76,0.3);
+            transform: translateX(4px);
+        }
+
+        .edu-icon {
+            flex-shrink: 0;
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: var(--gold-dim);
+            border: 1px solid rgba(201,168,76,0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            font-size: 1.1rem;
+        }
+
+        .edu-info .school {
+            font-size: 0.78rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+
+        .edu-info .degree {
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .edu-info .focus {
+            font-size: 0.875rem;
+            color: var(--muted);
+            font-weight: 300;
+        }
+
+        /* ─── Portfolio ─── */
         .portfolio-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
+            gap: 18px;
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 620px) {
             .portfolio-grid { grid-template-columns: 1fr; }
+            .social-links { flex-direction: column; align-items: center; }
         }
 
-        /* Work Experience Details */
-        details {
-            background-color: var(--card-bg);
-            padding: 1rem;
-            border-radius: 12px;
-            cursor: pointer;
-            border: 1px solid #334155;
-            margin-bottom: 1rem;
-        }
-
-        summary {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--accent-blue);
-            list-style: none;
+        .proj-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column;
+            transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
         }
 
-        summary::after { content: "▼"; font-size: 0.8rem; }
-        details[open] summary::after { content: "▲"; }
+        .proj-card:hover {
+            border-color: rgba(201,168,76,0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+        }
 
-        .job-title { font-weight: bold; color: #fff; display: block; font-size: 1.1rem; }
-        .company { color: var(--accent-blue); }
-        .date { font-size: 0.85rem; color: var(--text-dim); display: block; margin-bottom: 0.5rem; }
-        
-        ul { padding-left: 1.2rem; color: var(--text-dim); }
-        li { margin-bottom: 0.4rem; }
+        .proj-media {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .proj-media iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .proj-placeholder {
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .proj-placeholder.map-bg {
+            background: linear-gradient(135deg, #0a2342 0%, #1a4a7a 100%);
+            color: #5ab4f0;
+        }
+
+        .proj-placeholder.chart-bg {
+            background: linear-gradient(135deg, #0f1e12, #1a3320);
+            color: #4ade80;
+        }
+
+        .proj-placeholder.net-bg {
+            background: linear-gradient(135deg, #1a0d2e, #2d1b4e);
+            color: #a78bfa;
+        }
+
+        .proj-body {
+            padding: 22px 22px 22px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .proj-body h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .proj-body p {
+            font-size: 0.875rem;
+            color: var(--muted);
+            font-weight: 300;
+            line-height: 1.65;
+            flex: 1;
+            margin-bottom: 16px;
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
 
         .btn {
-            display: inline-block;
-            margin-top: 0.8rem;
-            color: var(--accent-blue);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--surface2);
+            color: var(--text);
             text-decoration: none;
-            font-size: 0.9rem;
-            border: 1px solid var(--accent-blue);
-            padding: 6px 14px;
-            border-radius: 6px;
-            transition: all 0.3s;
+            font-size: 0.8rem;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            transition: all 0.2s;
+            white-space: nowrap;
         }
 
         .btn:hover {
-            background: var(--accent-blue);
-            color: var(--bg-color);
+            border-color: var(--gold);
+            color: var(--gold);
+            background: var(--gold-dim);
         }
+
+        .btn.btn-primary {
+            background: var(--gold);
+            color: #0b0d12;
+            border-color: var(--gold);
+            font-weight: 500;
+        }
+
+        .btn.btn-primary:hover {
+            background: #dbb95a;
+            color: #0b0d12;
+        }
+
+        /* ─── Work Experience ─── */
+        details.work-details {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: border-color 0.25s;
+        }
+
+        details.work-details[open] {
+            border-color: rgba(201,168,76,0.3);
+        }
+
+        details.work-details summary {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 22px 28px;
+            cursor: pointer;
+            list-style: none;
+            user-select: none;
+            transition: background 0.2s;
+        }
+
+        details.work-details summary:hover {
+            background: var(--surface2);
+        }
+
+        details.work-details summary::-webkit-details-marker { display: none; }
+
+        .summary-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .summary-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 9px;
+            background: var(--gold-dim);
+            border: 1px solid rgba(201,168,76,0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            font-size: 0.95rem;
+            flex-shrink: 0;
+        }
+
+        .summary-text .title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .summary-text .sub {
+            font-size: 0.8rem;
+            color: var(--muted);
+            font-weight: 300;
+            margin-top: 1px;
+        }
+
+        .chevron {
+            color: var(--gold);
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        details[open] .chevron {
+            transform: rotate(180deg);
+        }
+
+        .work-timeline {
+            padding: 0 28px 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .work-item {
+            position: relative;
+            padding: 24px 0 24px 30px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .work-item:last-child {
+            border-bottom: none;
+            padding-bottom: 4px;
+        }
+
+        .work-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 30px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--gold);
+            box-shadow: 0 0 0 3px var(--gold-dim);
+        }
+
+        .work-item::after {
+            content: '';
+            position: absolute;
+            left: 3.5px;
+            top: 42px;
+            bottom: 0;
+            width: 1px;
+            background: var(--border);
+        }
+
+        .work-item:last-child::after { display: none; }
+
+        .work-header {
+            margin-bottom: 10px;
+        }
+
+        .work-header .role {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .work-header .company-date {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 3px;
+            flex-wrap: wrap;
+        }
+
+        .work-header .company-name {
+            font-size: 0.85rem;
+            color: var(--gold);
+            font-weight: 400;
+        }
+
+        .work-header .sep {
+            color: var(--border);
+        }
+
+        .work-header .date {
+            font-size: 0.8rem;
+            color: var(--muted);
+            font-weight: 300;
+        }
+
+        .work-item ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .work-item ul li {
+            font-size: 0.875rem;
+            color: #9a95a0;
+            font-weight: 300;
+            line-height: 1.6;
+            padding-left: 14px;
+            position: relative;
+        }
+
+        .work-item ul li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-size: 0.7rem;
+            top: 3px;
+        }
+
+        .work-item ul li strong {
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .work-item .btn {
+            margin-top: 14px;
+        }
+
+        /* ─── Animations ─── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .container > section,
+        .about-text,
+        header {
+            animation: fadeUp 0.6s ease both;
+        }
+
+        .container > section:nth-child(1) { animation-delay: 0.1s; }
+        .container > section:nth-child(2) { animation-delay: 0.2s; }
+        .container > section:nth-child(3) { animation-delay: 0.3s; }
+        .container > section:nth-child(4) { animation-delay: 0.4s; }
     </style>
 </head>
 <body>
+<div class="bg-glow"></div>
 
-    <header>
-        <img src="profile.jpg" alt="George Barrone" style="
-            width: 160px; 
-            height: 160px; 
-            border-radius: 50%; 
-            object-fit: cover; 
-            display: block; 
-            margin: 0 auto 1.5rem; 
-            border: 3px solid var(--accent-blue);
-            background-color: var(--card-bg);
-        ">
-        <h1>George Barrone</h1>
-        <p>Fullstack Developer | Cal State LA</p>
-        
-        <div class="social-links">
-            <a href="https://github.com/georgebarrone" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-            <a href="https://www.linkedin.com/in/george-barrone-a9759421a/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+<!-- ─── Header ─── -->
+<header>
+    <div class="avatar-wrap">
+        <img src="profile.jpg" alt="George Barrone">
+    </div>
+    <h1>George Barrone</h1>
+    <p class="tagline">Fullstack Developer &nbsp;·&nbsp; <span>Cal State LA</span></p>
+    <div class="social-links">
+        <a href="https://github.com/georgebarrone" target="_blank">
+            <i class="fab fa-github"></i> GitHub
+        </a>
+        <a href="https://www.linkedin.com/in/george-barrone-a9759421a/" target="_blank">
+            <i class="fab fa-linkedin"></i> LinkedIn
+        </a>
+    </div>
+</header>
+
+<div class="container">
+
+    <!-- ─── About ─── -->
+    <section>
+        <div class="section-label">
+            <div class="dot"></div>
+            <span>About</span>
         </div>
-    </header>
-
-    <div class="container">
-        
-        <section class="summary-box">
+        <div class="about-text">
             <p>
-    I am a recent Computer Science graduate from <strong>California State University, Los Angeles</strong>, 
-    deeply passionate about building secure, scalable, and data-driven solutions. With a technical 
-    foundation spanning Software Engineering, Data Science, and Network Security, I enjoy 
-    navigating the complexities of the full development lifecycle—from managing robust databases 
-    to deploying interactive VR environments.
-</p>
-<p>
-    I am currently seeking new professional opportunities where I can apply my skills in 
-    <strong>System Administration, IT, CyberSecurity, or Data Analysis</strong>.I am driven by the goal of making 
-    technology more efficient and accessible.
-</p>
-        </section>
+                I am a recent Computer Science graduate from <strong>California State University, Los Angeles</strong>,
+                deeply passionate about building secure, scalable, and data-driven solutions. With a technical
+                foundation spanning Software Engineering, Data Science, and Network Security, I enjoy
+                navigating the complexities of the full development lifecycle—from managing robust databases
+                to deploying interactive VR environments.
+            </p>
+            <p>
+                I am currently seeking new professional opportunities where I can apply my skills in
+                <strong>System Administration, IT, CyberSecurity, or Data Analysis</strong>. I am driven by the goal of making
+                technology more efficient and accessible.
+            </p>
+        </div>
+    </section>
 
-        <section>
-            <h2>Education</h2>
-            <div class="card">
-                <span class="company">California State University, Los Angeles</span>
-                <span class="job-title">B.S. in Computer Science</span>
-                <p>Focused on Software Engineering and Data Science.</p>
-            </div>
-            <div class="card">
-                <span class="company">South Pasadena High School</span>
-                <span class="job-title">High School Diploma</span>
-            </div>
-        </section>
+    <!-- ─── Education ─── -->
+    <section>
+        <div class="section-label">
+            <div class="dot"></div>
+            <span>Education</span>
+        </div>
 
-        <section>
-            <h2>Portfolio</h2>
-            <div class="portfolio-grid">
-                
-                <div class="card">
-                    <div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; margin-bottom: 1rem;">
-                        <iframe 
-                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
-                            src="https://www.youtube.com/embed/8yT373ldLY0" 
-                            title="The Platform's Labyrinth VR Demo" 
-                            allowfullscreen>
-                        </iframe>
-                    </div>
+        <div class="edu-card">
+            <div class="edu-icon"><i class="fas fa-graduation-cap"></i></div>
+            <div class="edu-info">
+                <div class="school">California State University, Los Angeles</div>
+                <div class="degree">B.S. in Computer Science</div>
+                <div class="focus">Focused on Software Engineering and Data Science</div>
+            </div>
+        </div>
+
+        <div class="edu-card">
+            <div class="edu-icon"><i class="fas fa-school"></i></div>
+            <div class="edu-info">
+                <div class="school">South Pasadena High School</div>
+                <div class="degree">High School Diploma</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── Portfolio ─── -->
+    <section>
+        <div class="section-label">
+            <div class="dot"></div>
+            <span>Portfolio</span>
+        </div>
+        <div class="portfolio-grid">
+
+            <div class="proj-card">
+                <div class="proj-media">
+                    <iframe
+                        src="https://www.youtube.com/embed/8yT373ldLY0"
+                        title="The Platform's Labyrinth VR Demo"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="proj-body">
                     <h3>The Platform's Labyrinth</h3>
                     <p>A high-stakes VR experience developed in Unity utilizing the XR Interaction Toolkit and custom locomotion logic.</p>
-                    <a href="https://georgebarrone.itch.io/the-platforms-labyrinth" target="_blank" class="btn">View on Itch.io</a>
-                </div>
-
-                <div class="card">
-                    <div style="height: 180px; background: linear-gradient(135deg, #075985, #7dd3fc); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
-                        <i class="fas fa-map-marked-alt" style="font-size: 4rem; color: white;"></i>
+                    <div class="btn-row">
+                        <a href="https://georgebarrone.itch.io/the-platforms-labyrinth" target="_blank" class="btn btn-primary">
+                            <i class="fas fa-gamepad"></i> View on Itch.io
+                        </a>
                     </div>
+                </div>
+            </div>
+
+            <div class="proj-card">
+                <div class="proj-placeholder map-bg">
+                    <i class="fas fa-map-marked-alt"></i>
+                </div>
+                <div class="proj-body">
                     <h3>Eagle Nav</h3>
                     <p>A mobile application built with Flutter featuring custom path-tracing and navigation logic for the Cal State LA campus.</p>
-                    <div style="display: flex; gap: 10px;">
-                        <a href="https://apps.apple.com/us/app/eaglenav/id6762229307" target="_blank" class="btn" style="background: var(--accent-blue); color: var(--bg-color); font-weight: bold;">
+                    <div class="btn-row">
+                        <a href="https://apps.apple.com/us/app/eaglenav/id6762229307" target="_blank" class="btn btn-primary">
                             <i class="fab fa-apple"></i> App Store
                         </a>
                         <a href="https://github.com/georgebarrone/Eagle-Nav" target="_blank" class="btn">
@@ -248,40 +743,71 @@
                         </a>
                     </div>
                 </div>
+            </div>
 
-                <div class="card">
-                    <div style="height: 120px; background: #334155; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
-                        <i class="fas fa-chart-line" style="font-size: 3rem; color: var(--accent-blue);"></i>
-                    </div>
+            <div class="proj-card">
+                <div class="proj-placeholder chart-bg">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="proj-body">
                     <h3>Ensemble Rainfall Predictor</h3>
                     <p>A data science project utilizing Random Forest and AdaBoost ensemble methods to classify and predict rainfall patterns.</p>
-                    <a href="https://github.com/georgebarrone/DataScience_Project" target="_blank" class="btn">
-                        <i class="fab fa-github"></i> View Project
-                    </a>
-                </div>
-                
-                <div class="card">
-                    <div style="height: 120px; background: #334155; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
-                        <i class="fas fa-network-wired" style="font-size: 3rem; color: var(--accent-blue);"></i>
+                    <div class="btn-row">
+                        <a href="https://github.com/georgebarrone/DataScience_Project" target="_blank" class="btn">
+                            <i class="fab fa-github"></i> View Project
+                        </a>
                     </div>
-                    <h3>Network Packet Analysis</h3>
-                    <p>Implementation of Distance Vector routing protocols and socket programming, with deep-dive analysis using Wireshark.</p>
-                    <a href="https://github.com/georgebarrone/ProgrammingAssignment2" target="_blank" class="btn">
-                        <i class="fab fa-github"></i> View Project
-                    </a>
                 </div>
             </div>
-        </section>
 
-        <section>
-            <h2>Work Experience</h2>
-            <details>
-                <summary>View Career History</summary>
-                
+            <div class="proj-card">
+                <div class="proj-placeholder net-bg">
+                    <i class="fas fa-network-wired"></i>
+                </div>
+                <div class="proj-body">
+                    <h3>Network Packet Analysis</h3>
+                    <p>Implementation of Distance Vector routing protocols and socket programming, with packet-level analysis</p>
+                    <div class="btn-row">
+                        <a href="https://github.com/georgebarrone/ProgrammingAssignment2" target="_blank" class="btn">
+                            <i class="fab fa-github"></i> View Project
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ─── Work Experience ─── -->
+    <section>
+        <div class="section-label">
+            <div class="dot"></div>
+            <span>Work Experience</span>
+        </div>
+
+        <details class="work-details">
+            <summary>
+                <div class="summary-left">
+                    <div class="summary-icon"><i class="fas fa-briefcase"></i></div>
+                    <div class="summary-text">
+                        <div class="title">Career History</div>
+                        <div class="sub">6 positions across tech, education & operations</div>
+                    </div>
+                </div>
+                <i class="fas fa-chevron-down chevron"></i>
+            </summary>
+
+            <div class="work-timeline">
+
                 <div class="work-item">
-                    <span class="job-title">Concessions Coordinator</span>
-                    <span class="company">Landmark Theatres</span>
-                    <span class="date">Jan 2026 – Present</span>
+                    <div class="work-header">
+                        <div class="role">Concessions Coordinator</div>
+                        <div class="company-date">
+                            <span class="company-name">Landmark Theatres</span>
+                            <span class="sep">·</span>
+                            <span class="date">Jan 2026 – Present</span>
+                        </div>
+                    </div>
                     <ul>
                         <li><strong>Floor Operations Management:</strong> Serve as the primary point of contact for daily operations, maintaining high standards of cleanliness and efficiency.</li>
                         <li><strong>Inventory & Prep Oversight:</strong> Direct preparation and inventory restocking to prevent product shortages and optimize sales during peak periods.</li>
@@ -290,9 +816,14 @@
                 </div>
 
                 <div class="work-item">
-                    <span class="job-title">Usher / Concessions</span>
-                    <span class="company">Landmark Theatres</span>
-                    <span class="date">Aug 2024 – Present</span>
+                    <div class="work-header">
+                        <div class="role">Usher / Concessions</div>
+                        <div class="company-date">
+                            <span class="company-name">Landmark Theatres</span>
+                            <span class="sep">·</span>
+                            <span class="date">Aug 2024 – Present</span>
+                        </div>
+                    </div>
                     <ul>
                         <li>Manage theatre logistics and guest relations in a high-stress, fast-paced environment.</li>
                         <li>Maintain a calm and professional demeanor while handling high-volume customer traffic and venue maintenance.</li>
@@ -300,21 +831,33 @@
                 </div>
 
                 <div class="work-item">
-                    <span class="job-title">iFixit Contributor</span>
-                    <span class="company">iFixit (Contract)</span>
-                    <span class="date">Feb 2024 – May 2024</span>
+                    <div class="work-header">
+                        <div class="role">iFixit Contributor</div>
+                        <div class="company-date">
+                            <span class="company-name">iFixit (Contract)</span>
+                            <span class="sep">·</span>
+                            <span class="date">Feb 2024 – May 2024</span>
+                        </div>
+                    </div>
                     <ul>
                         <li>Authored a device page for the HP 14 G3 Chromebook, providing technical specifications and general information for a global audience.</li>
                         <li>Created a detailed part replacement guide for the Nintendo Wii Nunchuk, utilizing technical writing skills and high-quality photography.</li>
                         <li>Collaborated with the iFixit technical writing team to ensure hardware procedures were accessible and accurate.</li>
                     </ul>
-                    <a href="https://www.linkedin.com/in/george-barrone-a9759421a/overlay/Position/2391575767/treasury?profileId=ACoAADdCVhMBVrdvYNGHHvij2gliiMDxv7_lXu0" target="_blank" class="btn">View iFixit Profile</a>
+                    <a href="https://www.linkedin.com/in/george-barrone-a9759421a/overlay/Position/2391575767/treasury?profileId=ACoAADdCVhMBVrdvYNGHHvij2gliiMDxv7_lXu0" target="_blank" class="btn">
+                        <i class="fas fa-external-link-alt"></i> View iFixit Profile
+                    </a>
                 </div>
 
                 <div class="work-item">
-                    <span class="job-title">Tech Sales Associate</span>
-                    <span class="company">Staples</span>
-                    <span class="date">Aug 2023 – Sep 2024</span>
+                    <div class="work-header">
+                        <div class="role">Tech Sales Associate</div>
+                        <div class="company-date">
+                            <span class="company-name">Staples</span>
+                            <span class="sep">·</span>
+                            <span class="date">Aug 2023 – Sep 2024</span>
+                        </div>
+                    </div>
                     <ul>
                         <li>Engaged customers on the sales floor to provide hardware and software recommendations.</li>
                         <li>Maintained floor organization, stocked inventory, and performed accurate cashiering duties.</li>
@@ -322,9 +865,14 @@
                 </div>
 
                 <div class="work-item">
-                    <span class="job-title">Math Assistant Instructor</span>
-                    <span class="company">SF Math Circle</span>
-                    <span class="date">Oct 2022 – Dec 2022</span>
+                    <div class="work-header">
+                        <div class="role">Math Assistant Instructor</div>
+                        <div class="company-date">
+                            <span class="company-name">SF Math Circle</span>
+                            <span class="sep">·</span>
+                            <span class="date">Oct 2022 – Dec 2022</span>
+                        </div>
+                    </div>
                     <ul>
                         <li>Facilitated remote group math exercises for students aged 6 to 13.</li>
                         <li>Assigned problem-solving tasks, monitored student progress, and provided 1-on-1 assistance when students were stuck.</li>
@@ -333,9 +881,14 @@
                 </div>
 
                 <div class="work-item">
-                    <span class="job-title">Host & Cook</span>
-                    <span class="company">Buffalo Wild Wings</span>
-                    <span class="date">Jul 2019 – Jan 2020</span>
+                    <div class="work-header">
+                        <div class="role">Host &amp; Cook</div>
+                        <div class="company-date">
+                            <span class="company-name">Buffalo Wild Wings</span>
+                            <span class="sep">·</span>
+                            <span class="date">Jul 2019 – Jan 2020</span>
+                        </div>
+                    </div>
                     <ul>
                         <li><strong>Hospitality:</strong> Greeted and seated guests, managed takeout orders, and handled incoming inquiries with a focus on accuracy and timeliness.</li>
                         <li><strong>Operations:</strong> Executed food preparation tasks according to established recipes and maintained rigorous kitchen cleanliness standards.</li>
@@ -343,10 +896,10 @@
                     </ul>
                 </div>
 
-            </details>
-        </section>
+            </div>
+        </details>
+    </section>
 
-    </div>
-
+</div>
 </body>
 </html>

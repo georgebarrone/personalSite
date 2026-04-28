@@ -1,37 +1,63 @@
-# Personal Portfolio | George Barrone
+# George Barrone — Personal Portfolio
 
-A professional, responsive portfolio website built to showcase my journey as a Fullstack Developer, featuring my work in mobile development, Virtual Reality, and Data Science.
+A professional, responsive portfolio website showcasing my work as a Fullstack Developer, with projects spanning mobile development, Virtual Reality, and Data Science.
 
-**Live Link:** [georgebarrone.github.io](https://georgebarrone.github.io)
-
-## 🚀 Key Projects
-
-- **Eagle Nav:** A Flutter-based mobile navigation app for Cal State LA, featuring custom path-tracing logic. [Available on the App Store](https://apps.apple.com/us/app/eaglenav/id6762229307).
-- **The Platform's Labyrinth:** A VR experience built in Unity using the XR Interaction Toolkit. [View on Itch.io](https://georgebarrone.itch.io/the-platforms-labyrinth).
-- **Ensemble Rainfall Predictor:** A Data Science project using Random Forest and AdaBoost to analyze and predict weather patterns.
-- **Network Packet Analysis:** Deep-dive into socket programming and routing protocols using Wireshark.
-
-## 🛠️ Technical Stack
-
-- **Frontend:** HTML5, CSS3 (Custom Properties/Flexbox/Grid), Font Awesome.
-- **Tools:** VS Code, Git, GitHub Pages.
-- **Background Expertise:** Python, Java, C#, Flutter (Dart), Unity (VR/XR).
-
-## 📁 Repository Structure
-
-- `index.html`: The core structure and styling of the portfolio.
-- `profile.jpg`: Personal professional headshot.
-- `README.md`: Project documentation.
-
-## 💼 Professional Background
-
-Currently pursuing a B.S. in Computer Science at **California State University, Los Angeles**.  
-Beyond coding, I have experience in leadership and operations, currently serving as a **Concessions Coordinator at Landmark Theatres**, where I manage floor operations and staff coordination in high-stress environments.
+**Live Site:** [georgebarrone.github.io](https://georgebarrone.github.io)
 
 ---
 
-### How to Run Locally
+## Projects
 
-1. Clone the repository:
-   ```bash
-   git clone [https://github.com/georgebarrone/georgebarrone.github.io.git](https://github.com/georgebarrone/georgebarrone.github.io.git)
+**Eagle Nav**
+A Flutter-based mobile navigation app for the Cal State LA campus, featuring custom path-tracing and routing logic. Available on the [App Store](https://apps.apple.com/us/app/eaglenav/id6762229307).
+
+**The Platform's Labyrinth**
+A high-stakes VR experience built in Unity using the XR Interaction Toolkit and custom locomotion logic. [View on Itch.io](https://georgebarrone.itch.io/the-platforms-labyrinth).
+
+**Ensemble Rainfall Predictor**
+A Data Science project applying Random Forest and AdaBoost ensemble methods to classify and predict rainfall patterns. [View on GitHub](https://github.com/georgebarrone/DataScience_Project).
+
+**Network Packet Analysis**
+An exploration of Distance Vector routing protocols and socket programming, with packet-level analysis conducted in Wireshark. [View on GitHub](https://github.com/georgebarrone/ProgrammingAssignment2).
+
+---
+
+## Technical Stack
+
+| Area | Technologies |
+|---|---|
+| Frontend | HTML5, CSS3 (Custom Properties, Flexbox, Grid), Font Awesome |
+| Languages | Python, Java, C#, Dart, SQL |
+| Frameworks | Flutter, Unity (XR/VR) |
+| Tools | Git, GitHub Pages, VS Code, Wireshark |
+
+---
+
+## Repository Structure
+
+```
+georgebarrone.github.io/
+├── index.html      # Core structure and styling
+├── profile.jpg     # Professional headshot
+└── README.md       # Project documentation
+```
+
+---
+
+## Running Locally
+
+Clone the repository and open `index.html` directly in a browser — no build step required.
+
+```bash
+git clone https://github.com/georgebarrone/georgebarrone.github.io.git
+cd georgebarrone.github.io
+open index.html
+```
+
+---
+
+## About
+
+I am a Computer Science graduate from **California State University, Los Angeles**, with a focus on Software Engineering and Data Science. I am currently seeking roles in System Administration, IT, Cybersecurity, or Data Analysis.
+
+Connect with me on [LinkedIn](https://www.linkedin.com/in/george-barrone-a9759421a/) or browse my work on [GitHub](https://github.com/georgebarrone).
