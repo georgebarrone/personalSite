@@ -142,6 +142,7 @@ strong {
 .tag-list span,
 .card-actions a,
 .action-link,
+.hero-contact,
 .view-switch button,
 .theme-toggle,
 .summary-title {
@@ -313,6 +314,26 @@ html[data-theme="dark"] .theme-toggle-thumb {
 .hero-copy h2 {
     margin-top: 18px;
     font-size: clamp(2.8rem, 8vw, 5.2rem);
+}
+
+.hero-contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    margin-top: 18px;
+    color: var(--muted-strong);
+    font-size: 0.95rem;
+}
+
+.hero-contact a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+}
+
+.hero-contact i {
+    color: var(--accent);
 }
 
 .hero-lead,
