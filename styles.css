@@ -1,6 +1,13 @@
 :root {
     --radius: 22px;
     --shadow-soft: 0 24px 60px var(--shadow);
+    --ambient-x: 50vw;
+    --ambient-y: 40vh;
+    --ambient-left-y: 22vh;
+    --ambient-right-y: 78vh;
+    --ambient-drift-x: 0px;
+    --ambient-drift-y: 0px;
+    --ambient-opacity: 0.55;
 }
 
 html[data-theme="light"] {
@@ -16,6 +23,8 @@ html[data-theme="light"] {
     --line-soft: #d8d8d1;
     --accent: #0d8b4d;
     --accent-soft: rgba(13, 139, 77, 0.04);
+    --ambient-glow: rgba(13, 139, 77, 0.07);
+    --ambient-trace: rgba(13, 139, 77, 0.035);
     --shadow: rgba(17, 17, 14, 0.08);
     --grid-line: rgba(17, 17, 14, 0.05);
 }
@@ -33,6 +42,8 @@ html[data-theme="dark"] {
     --line-soft: #2b2b28;
     --accent: #59ff90;
     --accent-soft: rgba(89, 255, 144, 0.11);
+    --ambient-glow: rgba(89, 255, 144, 0.12);
+    --ambient-trace: rgba(89, 255, 144, 0.05);
     --shadow: rgba(0, 0, 0, 0.28);
     --grid-line: rgba(255, 255, 255, 0.05);
 }
@@ -64,8 +75,10 @@ body::before {
     background-image:
         linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
         linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+    background-position: var(--ambient-drift-x) var(--ambient-drift-y);
     background-size: 38px 38px;
     pointer-events: none;
+    will-change: background-position;
 }
 
 body::after {
@@ -75,9 +88,13 @@ body::after {
     z-index: -1;
     pointer-events: none;
     background:
+        radial-gradient(circle 420px at 0 var(--ambient-left-y), var(--ambient-glow), transparent 68%),
+        radial-gradient(circle 420px at 100% var(--ambient-right-y), var(--ambient-glow), transparent 68%),
+        radial-gradient(circle 260px at var(--ambient-x) var(--ambient-y), var(--ambient-trace), transparent 72%),
         radial-gradient(circle at top left, var(--accent-soft), transparent 28%),
         radial-gradient(circle at bottom right, var(--accent-soft), transparent 24%);
-    opacity: 0.55;
+    opacity: var(--ambient-opacity);
+    will-change: background, opacity;
 }
 
 a {
@@ -127,7 +144,6 @@ strong {
 .action-link,
 .view-switch button,
 .theme-toggle,
-.frame-meta,
 .summary-title {
     font-family: "IBM Plex Mono", monospace;
 }
@@ -461,28 +477,6 @@ html[data-theme="dark"] .theme-toggle-thumb {
     height: 100%;
     display: block;
     object-fit: cover;
-}
-
-.frame-meta {
-    position: absolute;
-    left: 22px;
-    right: 22px;
-    display: flex;
-    justify-content: space-between;
-    gap: 16px;
-    color: var(--accent);
-    font-size: 0.65rem;
-    letter-spacing: 0.09em;
-    text-transform: uppercase;
-    z-index: 1;
-}
-
-.frame-meta-top {
-    top: 18px;
-}
-
-.frame-meta-bottom {
-    bottom: 18px;
 }
 
 .section-block {
@@ -911,12 +905,6 @@ html[data-theme="dark"] .theme-toggle-thumb {
 
     .portrait-frame {
         padding: 14px;
-    }
-
-    .frame-meta {
-        left: 18px;
-        right: 18px;
-        font-size: 0.56rem;
     }
 
     .info-card,

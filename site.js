@@ -87,6 +87,57 @@
         }
     }
 
+    function initAmbientBackground() {
+        const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+        const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+
+        if (reducedMotion.matches || !finePointer.matches) {
+            return;
+        }
+
+        let frameId = 0;
+        let nextX = window.innerWidth / 2;
+        let nextY = window.innerHeight * 0.4;
+
+        function syncAmbientPosition() {
+            frameId = 0;
+
+            const width = Math.max(window.innerWidth, 1);
+            const height = Math.max(window.innerHeight, 1);
+            const xRatio = nextX / width;
+            const yRatio = nextY / height;
+            const edgeDistance = Math.min(xRatio, 1 - xRatio);
+            const edgeStrength = 1 - Math.min(edgeDistance / 0.36, 1);
+
+            root.style.setProperty("--ambient-x", `${nextX}px`);
+            root.style.setProperty("--ambient-y", `${nextY}px`);
+            root.style.setProperty("--ambient-left-y", `${nextY}px`);
+            root.style.setProperty("--ambient-right-y", `${height - nextY}px`);
+            root.style.setProperty("--ambient-drift-x", `${(xRatio - 0.5) * -16}px`);
+            root.style.setProperty("--ambient-drift-y", `${(yRatio - 0.5) * -16}px`);
+            root.style.setProperty("--ambient-opacity", `${0.48 + edgeStrength * 0.22}`);
+        }
+
+        function queueAmbientPosition(event) {
+            nextX = event.clientX;
+            nextY = event.clientY;
+
+            if (!frameId) {
+                frameId = window.requestAnimationFrame(syncAmbientPosition);
+            }
+        }
+
+        window.addEventListener("pointermove", queueAmbientPosition, { passive: true });
+        window.addEventListener("pointerleave", () => {
+            nextX = window.innerWidth / 2;
+            nextY = window.innerHeight * 0.4;
+
+            if (!frameId) {
+                frameId = window.requestAnimationFrame(syncAmbientPosition);
+            }
+        });
+    }
+
     tabs.forEach((tab, index) => {
         tab.addEventListener("click", () => {
             setView(tab.dataset.viewTarget, true);
@@ -117,4 +168,5 @@
 
     setTheme(getStoredTheme());
     setView(getRequestedView());
+    initAmbientBackground();
 })();
