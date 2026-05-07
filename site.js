@@ -1,7 +1,11 @@
 (() => {
+    const root = document.documentElement;
     const views = Array.from(document.querySelectorAll("[data-view]"));
     const tabs = Array.from(document.querySelectorAll("[data-view-target]"));
+    const themeToggle = document.querySelector("[data-theme-toggle]");
+    const themeLabel = document.querySelector("[data-theme-label]");
     const validViews = new Set(views.map((view) => view.dataset.view));
+    const themeKey = "gb-theme";
 
     function getRequestedView() {
         const hashView = window.location.hash.replace("#", "");
@@ -46,8 +50,40 @@
             try {
                 window.history.pushState({ view: nextView }, "", getCanonicalUrl(nextView));
             } catch {
-                // Some local file previews reject URL updates; the view has already switched.
+                // Some local previews reject URL updates; the view has already switched.
             }
+        }
+    }
+
+    function getStoredTheme() {
+        try {
+            const storedTheme = window.localStorage.getItem(themeKey);
+            return storedTheme === "dark" ? "dark" : "light";
+        } catch {
+            return "light";
+        }
+    }
+
+    function syncThemeUi(theme) {
+        if (!themeToggle || !themeLabel) {
+            return;
+        }
+
+        const isDark = theme === "dark";
+        themeToggle.setAttribute("aria-pressed", String(isDark));
+        themeToggle.setAttribute("aria-label", isDark ? "Activate light mode" : "Activate dark mode");
+        themeLabel.textContent = isDark ? "Dark" : "Light";
+    }
+
+    function setTheme(theme) {
+        const nextTheme = theme === "dark" ? "dark" : "light";
+        root.dataset.theme = nextTheme;
+        syncThemeUi(nextTheme);
+
+        try {
+            window.localStorage.setItem(themeKey, nextTheme);
+        } catch {
+            // Ignore storage access issues; the current session theme is still applied.
         }
     }
 
@@ -69,9 +105,16 @@
         });
     });
 
+    if (themeToggle) {
+        themeToggle.addEventListener("click", () => {
+            setTheme(root.dataset.theme === "dark" ? "light" : "dark");
+        });
+    }
+
     window.addEventListener("popstate", () => {
         setView(getRequestedView());
     });
 
+    setTheme(getStoredTheme());
     setView(getRequestedView());
 })();

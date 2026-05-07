@@ -1,320 +1,354 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>George Barrone - Developer & Engineer</title>
+    <script>
+        (() => {
+            try {
+                const storedTheme = window.localStorage.getItem("gb-theme");
+                if (storedTheme === "light" || storedTheme === "dark") {
+                    document.documentElement.dataset.theme = storedTheme;
+                }
+            } catch {
+                // Ignore storage access issues and keep the default light theme.
+            }
+        })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="./styles.css">
 </head>
 <body data-initial-view="home">
-    <header class="site-header">
-        <div class="header-inner">
-            <div class="avatar-wrap">
-                <img src="profile.jpg" alt="George Barrone">
-            </div>
+    <header class="site-topbar">
+        <div class="topbar-inner">
+            <a class="brand" href="#top" aria-label="George Barrone home">
+                <span>George Barrone</span>
+            </a>
 
-            <div class="identity">
-                <p class="eyebrow">Developer & Engineer</p>
-                <h1>George Barrone</h1>
-                <p class="tagline">Fullstack Developer | Cal State LA</p>
-            </div>
+            <div class="topbar-actions">
+                <nav class="view-switch" aria-label="Site sections" role="tablist">
+                    <button type="button" role="tab" aria-selected="true" aria-controls="home-view" id="home-tab" data-view-target="home">
+                        <span>Home</span>
+                    </button>
+                    <button type="button" role="tab" aria-selected="false" aria-controls="personal-view" id="personal-tab" data-view-target="personal">
+                        <span>Personal</span>
+                    </button>
+                </nav>
 
-            <div class="header-actions" aria-label="Social links">
-                <a href="https://github.com/georgebarrone" target="_blank" rel="noreferrer">
-                    <i class="fab fa-github" aria-hidden="true"></i>
-                    <span>GitHub</span>
-                </a>
-                <a href="https://www.linkedin.com/in/george-barrone-a9759421a/" target="_blank" rel="noreferrer">
-                    <i class="fab fa-linkedin" aria-hidden="true"></i>
-                    <span>LinkedIn</span>
-                </a>
-            </div>
-
-            <nav class="view-switch" aria-label="Site sections" role="tablist">
-                <button type="button" role="tab" aria-selected="true" aria-controls="home-view" id="home-tab" data-view-target="home">
-                    <i class="fas fa-house" aria-hidden="true"></i>
-                    <span>Home</span>
+                <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false" aria-label="Activate dark mode">
+                    <span class="theme-toggle-track" aria-hidden="true">
+                        <span class="theme-toggle-thumb"></span>
+                    </span>
+                    <span class="theme-toggle-copy">
+                        <i class="fas fa-circle-half-stroke" aria-hidden="true"></i>
+                        <span data-theme-label>Light</span>
+                    </span>
                 </button>
-                <button type="button" role="tab" aria-selected="false" aria-controls="personal-view" id="personal-tab" data-view-target="personal">
-                    <i class="fas fa-user-astronaut" aria-hidden="true"></i>
-                    <span>Personal</span>
-                </button>
-            </nav>
+            </div>
         </div>
     </header>
 
-    <main class="page-shell">
+    <main class="page-shell" id="top">
         <section class="view-panel is-active" id="home-view" data-view="home" role="tabpanel" aria-labelledby="home-tab">
-            <section class="intro-section" aria-labelledby="about-title">
-                <div class="section-heading">
-                    <p id="about-title">About</p>
+            <section class="hero-section" aria-labelledby="hero-title">
+                <div class="hero-copy">
+                    <p class="eyebrow">software engineer</p>
+                    <h1 id="hero-title">George<br>Barrone</h1>
+                    <p class="hero-lead">
+                        I am a recent Computer Science graduate from California State University, Los Angeles, deeply
+                        passionate about building secure, scalable, and data-driven solutions. With a technical
+                        foundation spanning Software Engineering, Data Science, and Network Security, I enjoy navigating
+                        the complexities of the full development lifecycle.
+                    </p>
+                    <p class="hero-lead">
+                        I am currently seeking new professional opportunities where I can apply my skills in System
+                        Administration, IT, CyberSecurity, or Data Analysis. I am driven by the goal of making technology
+                        more efficient and accessible.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a href="https://github.com/georgebarrone" target="_blank" rel="noreferrer" class="icon-link" aria-label="GitHub">
+                            <i class="fab fa-github" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/george-barrone-a9759421a/" target="_blank" rel="noreferrer" class="icon-link" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+                        </a>
+                        <a href="./George%20Barrone%20Resume%202026.pdf" target="_blank" rel="noreferrer" class="icon-link" aria-label="Open resume PDF">
+                            <i class="fas fa-file-pdf" aria-hidden="true"></i>
+                        </a>
+                    </div>
                 </div>
 
-                <div class="intro-copy">
-                    <p>
-                        I am a recent Computer Science graduate from <strong>California State University, Los Angeles</strong>,
-                        deeply passionate about building secure, scalable, and data-driven solutions. With a technical
-                        foundation spanning Software Engineering, Data Science, and Network Security, I enjoy
-                        navigating the complexities of the full development lifecycle.
-                    </p>
-                    <p>
-                        I am currently seeking new professional opportunities where I can apply my skills in
-                        <strong>System Administration, IT, CyberSecurity, or Data Analysis</strong>. I am driven by the goal of making
-                        technology more efficient and accessible.
-                    </p>
-
-                    <div class="about-languages">
-                        <p class="row-kicker">Programming Languages</p>
-                        <p>Python, Java, C#, Dart, SQL, HTML/CSS, JavaScript</p>
+                <div class="hero-visual">
+                    <div class="portrait-frame">
+                        <img src="profile.jpg" alt="George Barrone portrait">
+                        <div class="frame-meta frame-meta-bottom">
+                            <span>LOS_ANGELES_CA</span>
+                            <span>FULLSTACK / IT / DATA</span>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <section class="section-block" aria-labelledby="education-title">
-                <div class="section-heading compact">
-                    <p id="education-title">Education</p>
+            <section class="section-block" aria-labelledby="snapshot-title">
+                <div class="section-intro section-intro-split">
+                    <div>
+                        <p class="eyebrow">about me</p>
+                        <h2 id="snapshot-title">Quick Overview</h2>
+                    </div>
+                    <p class="section-copy">
+                        I am actively looking for roles where I can contribute across software, IT, cybersecurity,
+                        and data-focused problem solving.
+                    </p>
                 </div>
 
-                <div class="education-list">
-                    <article class="education-row">
-                        <div class="row-icon">
-                            <i class="fas fa-graduation-cap" aria-hidden="true"></i>
-                        </div>
-                        <div>
-                            <p class="row-kicker">California State University, Los Angeles</p>
-                            <h3>B.S. in Computer Science</h3>
-                            <p>Focused on Software Engineering and Data Science</p>
-                        </div>
+                <div class="summary-grid">
+                    <article class="info-card">
+                        <p class="card-label">Education</p>
+                        <h3>California State University, Los Angeles</h3>
+                        <p>B.S. in Computer Science with a strong foundation in software engineering and data science. GPA: 3.74.</p>
                     </article>
 
-                    <article class="education-row">
-                        <div class="row-icon">
-                            <i class="fas fa-school" aria-hidden="true"></i>
-                        </div>
-                        <div>
-                            <p class="row-kicker">South Pasadena High School</p>
-                            <h3>High School Diploma</h3>
-                        </div>
+                    <article class="info-card">
+                        <p class="card-label">Focus Areas</p>
+                        <h3>Data Science, Game Development, App Development</h3>
+                        <p>Also focused on database / system administration and reliable software delivery.</p>
+                    </article>
+
+                    <article class="info-card">
+                        <p class="card-label">Languages</p>
+                        <h3>Python, Java, C#, Dart, SQL, JS, CSS, HTML</h3>
+                        <p>Used across data work, application development, and polished user-facing experiences.</p>
                     </article>
                 </div>
             </section>
 
             <section class="section-block" aria-labelledby="portfolio-title">
-                <div class="section-heading compact">
-                    <p id="portfolio-title">Portfolio</p>
+                <div class="section-intro section-intro-split">
+                    <div>
+                        <p class="eyebrow">portfolio</p>
+                        <h2 id="portfolio-title">Projects</h2>
+                    </div>
                 </div>
 
-                <div class="project-list">
-                    <article class="project-entry feature-project">
-                        <div class="project-visual video-visual">
+                <div class="project-grid">
+                    <article class="project-card">
+                        <div class="project-card-header">
+                            <div class="project-badge">
+                                <i class="fas fa-vr-cardboard" aria-hidden="true"></i>
+                            </div>
+                            <a href="https://georgebarrone.itch.io/the-platforms-labyrinth" target="_blank" rel="noreferrer" class="project-link" aria-label="Open The Platform's Labyrinth">
+                                <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                        <h3>The Platform's Labyrinth</h3>
+                        <div class="tag-list" aria-label="Technologies used">
+                            <span>Unity</span>
+                            <span>XR Toolkit</span>
+                            <span>Meta Quest 2</span>
+                        </div>
+                        <p>Developed a 3-5 minute VR proof-of-concept game focused on locomotion, interaction, and headset-ready immersion.</p>
+                        <div class="project-video">
                             <iframe
-                                src="https://www.youtube.com/embed/8yT373ldLY0"
-                                title="The Platform's Labyrinth VR Demo"
+                                src="https://www.youtube.com/embed/3PEWsUQLZUQ"
+                                title="The Platform's Labyrinth gameplay video"
+                                loading="lazy"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                 allowfullscreen>
                             </iframe>
                         </div>
-                        <div class="project-content">
-                            <p class="row-kicker">Unity | Meta Quest 2</p>
-                            <h3>The Platform's Labyrinth</h3>
-                            <p>Developed a 3-5 minute VR proof-of-concept game in Unity targeting the Meta Quest 2, utilizing the XR Interaction Toolkit for interaction and locomotion.</p>
-                            <div class="btn-row">
-                                <a href="https://georgebarrone.itch.io/the-platforms-labyrinth" target="_blank" rel="noreferrer" class="btn btn-primary">
-                                    <i class="fas fa-gamepad" aria-hidden="true"></i>
-                                    <span>View on Itch.io</span>
-                                </a>
-                            </div>
+                        <div class="card-actions">
+                            <a href="https://georgebarrone.itch.io/the-platforms-labyrinth" target="_blank" rel="noreferrer">View on Itch.io</a>
                         </div>
                     </article>
 
-                    <article class="project-entry">
-                        <div class="project-visual icon-visual map-bg">
-                            <i class="fas fa-map-marked-alt" aria-hidden="true"></i>
-                        </div>
-                        <div class="project-content">
-                            <p class="row-kicker">Flutter | Campus Navigation</p>
-                            <h3>Eagle Nav</h3>
-                            <p>A mobile application built with Flutter featuring custom path-tracing and navigation logic for the Cal State LA campus.</p>
-                            <div class="btn-row">
-                                <a href="https://apps.apple.com/us/app/eaglenav/id6762229307" target="_blank" rel="noreferrer" class="btn btn-primary">
-                                    <i class="fab fa-apple" aria-hidden="true"></i>
-                                    <span>App Store</span>
-                                </a>
-                                <a href="https://github.com/CSULA-EagleNav-Dev-Team/Eagle-Nav" target="_blank" rel="noreferrer" class="btn">
-                                    <i class="fab fa-github" aria-hidden="true"></i>
-                                    <span>Source</span>
-                                </a>
+                    <article class="project-card">
+                        <div class="project-card-header">
+                            <div class="project-badge">
+                                <i class="fas fa-map-location-dot" aria-hidden="true"></i>
                             </div>
-                        </div>
-                    </article>
-
-                    <article class="project-entry">
-                        <div class="project-visual icon-visual chart-bg">
-                            <i class="fas fa-chart-line" aria-hidden="true"></i>
-                        </div>
-                        <div class="project-content">
-                            <p class="row-kicker">Data Science | Ensemble Models</p>
-                            <h3>Ensemble Rainfall Predictor</h3>
-                            <p>A data science project utilizing Random Forest and AdaBoost ensemble methods to classify and predict rainfall patterns.</p>
-                            <div class="btn-row">
-                                <a href="https://github.com/georgebarrone/DataScience_Project" target="_blank" rel="noreferrer" class="btn">
-                                    <i class="fab fa-github" aria-hidden="true"></i>
-                                    <span>View Project</span>
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="project-entry">
-                        <div class="project-visual icon-visual net-bg">
-                            <i class="fas fa-network-wired" aria-hidden="true"></i>
-                        </div>
-                        <div class="project-content">
-                            <p class="row-kicker">Networking | Packet Analysis</p>
-                            <h3>Network Packet Analysis</h3>
-                            <p>Implementation of Distance Vector routing protocols and socket programming, with packet-level analysis.</p>
-                            <div class="btn-row">
-                                <a href="https://github.com/georgebarrone/ProgrammingAssignment2" target="_blank" rel="noreferrer" class="btn">
-                                    <i class="fab fa-github" aria-hidden="true"></i>
-                                    <span>View Project</span>
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-            </section>
-
-            <section class="section-block" aria-labelledby="work-title">
-                <div class="section-heading compact">
-                    <p id="work-title">Work Experience</p>
-                </div>
-
-                <details class="accordion">
-                    <summary>
-                        <span class="summary-left">
-                            <span class="summary-icon">
-                                <i class="fas fa-briefcase" aria-hidden="true"></i>
-                            </span>
-                            <span class="summary-text">
-                                <span class="title">Career History</span>
-                                <span class="sub">6 positions across tech, education & operations</span>
-                            </span>
-                        </span>
-                        <i class="fas fa-chevron-down chevron" aria-hidden="true"></i>
-                    </summary>
-
-                    <div class="work-list">
-                        <article class="work-item">
-                            <div class="work-header">
-                                <h3>Concessions Coordinator</h3>
-                                <p><span>Landmark Theatres</span> | Jan 2026 - Present</p>
-                            </div>
-                            <ul>
-                                <li><strong>Floor Operations Management:</strong> Serve as the primary point of contact for daily operations, maintaining high standards of cleanliness and efficiency.</li>
-                                <li><strong>Inventory & Prep Oversight:</strong> Direct preparation and inventory restocking to prevent product shortages and optimize sales during peak periods.</li>
-                                <li><strong>Leadership:</strong> Coordinate staff break schedules to maintain continuous coverage while acting as the lead authority for resolving customer issues, refunds, and exchanges.</li>
-                            </ul>
-                        </article>
-
-                        <article class="work-item">
-                            <div class="work-header">
-                                <h3>Usher / Concessions</h3>
-                                <p><span>Landmark Theatres</span> | Aug 2024 - Present</p>
-                            </div>
-                            <ul>
-                                <li>Manage theatre logistics and guest relations in a high-stress, fast-paced environment.</li>
-                                <li>Maintain a calm and professional demeanor while handling high-volume customer traffic and venue maintenance.</li>
-                            </ul>
-                        </article>
-
-                        <article class="work-item">
-                            <div class="work-header">
-                                <h3>iFixit Contributor</h3>
-                                <p><span>iFixit (Contract)</span> | Feb 2024 - May 2024</p>
-                            </div>
-                            <ul>
-                                <li>Authored a device page for the HP 14 G3 Chromebook, providing technical specifications and general information for a global audience.</li>
-                                <li>Created a detailed part replacement guide for the Nintendo Wii Nunchuk, utilizing technical writing skills and high-quality photography.</li>
-                                <li>Collaborated with the iFixit technical writing team to ensure hardware procedures were accessible and accurate.</li>
-                            </ul>
-                            <a href="https://www.ifixit.com/User/4474729/George+Barrone" target="_blank" rel="noreferrer" class="btn">
-                                <i class="fas fa-external-link-alt" aria-hidden="true"></i>
-                                <span>View iFixit Profile</span>
+                            <a href="https://apps.apple.com/us/app/eaglenav/id6762229307" target="_blank" rel="noreferrer" class="project-link" aria-label="Open Eagle Nav on the App Store">
+                                <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
                             </a>
-                        </article>
+                        </div>
+                        <h3>Eagle Nav</h3>
+                        <div class="tag-list" aria-label="Technologies used">
+                            <span>Flutter</span>
+                            <span>Mobile</span>
+                            <span>Navigation</span>
+                        </div>
+                        <p>A campus navigation app for Cal State LA with custom path-tracing logic and a smoother wayfinding experience.</p>
+                        <div class="app-screenshot-strip" aria-label="Eagle Nav app screenshots">
+                            <img src="https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/1f/d5/40/1fd54081-7233-f9f3-6384-04230d125a33/IMG_1604.png/300x650bb.webp" alt="Eagle Nav app screenshot showing the campus navigation interface">
+                            <img src="https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/58/f7/a3/58f7a364-f863-83c5-b04b-8e4ff1d6d97e/IMG_1605.png/300x650bb.webp" alt="Eagle Nav app screenshot showing a route view">
+                            <img src="https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/59/54/5e/59545e26-1924-2234-6a54-e61f8693c000/IMG_1606.png/300x650bb.webp" alt="Eagle Nav app screenshot showing navigation controls">
+                            <img src="https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/41/7f/0c/417f0cdf-9dd4-ff61-76c1-47e62bb2b5ca/IMG_1607.png/300x650bb.webp" alt="Eagle Nav app screenshot showing campus app details">
+                        </div>
+                        <div class="card-actions">
+                            <a href="https://apps.apple.com/us/app/eaglenav/id6762229307" target="_blank" rel="noreferrer">App Store</a>
+                            <a href="https://github.com/CSULA-EagleNav-Dev-Team/Eagle-Nav" target="_blank" rel="noreferrer">Source</a>
+                        </div>
+                    </article>
 
-                        <article class="work-item">
-                            <div class="work-header">
-                                <h3>Tech Sales Associate</h3>
-                                <p><span>Staples</span> | Aug 2023 - Sep 2024</p>
+                    <article class="project-card">
+                        <div class="project-card-header">
+                            <div class="project-badge">
+                                <i class="fas fa-chart-column" aria-hidden="true"></i>
                             </div>
-                            <ul>
-                                <li>Engaged customers on the sales floor to provide hardware and software recommendations.</li>
-                                <li>Maintained floor organization, stocked inventory, and performed accurate cashiering duties.</li>
-                            </ul>
-                        </article>
+                            <a href="https://github.com/georgebarrone/DataScience_Project" target="_blank" rel="noreferrer" class="project-link" aria-label="Open Ensemble Rainfall Predictor">
+                                <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                        <h3>Ensemble Rainfall Predictor</h3>
+                        <div class="tag-list" aria-label="Technologies used">
+                            <span>Python</span>
+                            <span>Random Forest</span>
+                            <span>AdaBoost</span>
+                        </div>
+                        <p>A data science project using ensemble models to classify rainfall patterns and compare predictive performance.</p>
+                        <div class="card-actions">
+                            <a href="https://github.com/georgebarrone/DataScience_Project" target="_blank" rel="noreferrer">View Project</a>
+                        </div>
+                    </article>
 
-                        <article class="work-item">
-                            <div class="work-header">
-                                <h3>Math Assistant Instructor</h3>
-                                <p><span>SF Math Circle</span> | Oct 2022 - Dec 2022</p>
+                    <article class="project-card">
+                        <div class="project-card-header">
+                            <div class="project-badge">
+                                <i class="fas fa-network-wired" aria-hidden="true"></i>
                             </div>
-                            <ul>
-                                <li>Facilitated remote group math exercises for students aged 6 to 13.</li>
-                                <li>Assigned problem-solving tasks, monitored student progress, and provided 1-on-1 assistance when students were stuck.</li>
-                                <li>Encouraged collaborative learning and peer-to-peer discussions in a virtual environment.</li>
-                            </ul>
-                        </article>
-
-                        <article class="work-item">
-                            <div class="work-header">
-                                <h3>Host &amp; Cook</h3>
-                                <p><span>Buffalo Wild Wings</span> | Jul 2019 - Jan 2020</p>
-                            </div>
-                            <ul>
-                                <li><strong>Hospitality:</strong> Greeted and seated guests, managed takeout orders, and handled incoming inquiries with a focus on accuracy and timeliness.</li>
-                                <li><strong>Operations:</strong> Executed food preparation tasks according to established recipes and maintained rigorous kitchen cleanliness standards.</li>
-                                <li>Collaborated with team members to ensure smooth service and timely delivery of orders.</li>
-                            </ul>
-                        </article>
-                    </div>
-                </details>
+                            <a href="https://github.com/georgebarrone/ProgrammingAssignment2" target="_blank" rel="noreferrer" class="project-link" aria-label="Open Network Packet Analysis">
+                                <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                        <h3>Network Packet Analysis</h3>
+                        <div class="tag-list" aria-label="Technologies used">
+                            <span>Networking</span>
+                            <span>Sockets</span>
+                            <span>Routing</span>
+                        </div>
+                        <p>Implemented distance-vector routing and socket programming concepts with packet-level analysis and debugging.</p>
+                        <div class="card-actions">
+                            <a href="https://github.com/georgebarrone/ProgrammingAssignment2" target="_blank" rel="noreferrer">View Project</a>
+                        </div>
+                    </article>
+                </div>
             </section>
 
             <section class="section-block" aria-labelledby="resume-title">
-                <div class="section-heading compact">
-                    <p id="resume-title">Resume</p>
+                <div class="section-intro section-intro-split">
+                    <div>
+                        <p class="eyebrow">documents</p>
+                        <h2 id="resume-title">Resume &amp; Career History</h2>
+                    </div>
                 </div>
 
-                <details class="accordion resume-accordion">
+                <div class="utility-grid">
+                    <article class="utility-card">
+                        <p class="card-label">Resume</p>
+                        <h3>George Barrone Resume 2026</h3>
+                        <p>Download the PDF directly or open it in a new tab.</p>
+                        <div class="card-actions">
+                            <a href="./George%20Barrone%20Resume%202026.pdf" download="George Barrone Resume 2026.pdf">Download PDF</a>
+                            <a href="./George%20Barrone%20Resume%202026.pdf" target="_blank" rel="noreferrer">Open PDF</a>
+                        </div>
+                    </article>
+
+                    <article class="utility-card">
+                        <p class="card-label">Profiles</p>
+                        <h3>Find Me Online</h3>
+                        <p>GitHub , LinkedIn , and iFixit </p>
+                        <div class="card-actions">
+                            <a href="https://github.com/georgebarrone" target="_blank" rel="noreferrer">GitHub</a>
+                            <a href="https://www.linkedin.com/in/george-barrone-a9759421a/" target="_blank" rel="noreferrer">LinkedIn</a>
+                            <a href="https://www.ifixit.com/User/4474729/George+Barrone" target="_blank" rel="noreferrer">iFixit</a>
+                        </div>
+                    </article>
+                </div>
+
+                <details class="resume-drawer">
                     <summary>
-                        <span class="summary-left">
-                            <span class="summary-icon">
-                                <i class="fas fa-file-pdf" aria-hidden="true"></i>
-                            </span>
-                            <span class="summary-text">
-                                <span class="title">George Barrone Resume</span>
-                                <span class="sub">2026 PDF</span>
-                            </span>
-                        </span>
-                        <i class="fas fa-chevron-down chevron" aria-hidden="true"></i>
+                        <span class="summary-title">Career History</span>
+                        <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </summary>
+
+                    <div class="resume-panel resume-career-panel">
+                        <div class="experience-grid">
+                            <article class="experience-card">
+                                <p class="card-label">Landmark Theatres</p>
+                                <h3>Concessions Coordinator</h3>
+                                <p class="experience-meta">Jan 2026 - Present</p>
+                                <ul class="detail-list">
+                                    <li>Lead daily floor operations and keep service standards high during busy shifts.</li>
+                                    <li>Oversee prep and inventory restocking to avoid shortages during peak demand.</li>
+                                    <li>Coordinate break coverage and handle customer issues, refunds, and exchanges.</li>
+                                </ul>
+                            </article>
+
+                            <article class="experience-card">
+                                <p class="card-label">Landmark Theatres</p>
+                                <h3>Usher / Concessions</h3>
+                                <p class="experience-meta">Aug 2024 - Present</p>
+                                <ul class="detail-list">
+                                    <li>Support theatre logistics and guest relations in a fast-paced environment.</li>
+                                    <li>Maintain calm, professional service while handling large customer flows.</li>
+                                </ul>
+                            </article>
+
+                            <article class="experience-card">
+                                <p class="card-label">iFixit</p>
+                                <h3>Contributor</h3>
+                                <p class="experience-meta">Feb 2024 - May 2024</p>
+                                <ul class="detail-list">
+                                    <li>Wrote technical device documentation for the HP 14 G3 Chromebook.</li>
+                                    <li>Created a replacement guide for the Nintendo Wii Nunchuk with original photography.</li>
+                                    <li>Worked with the technical writing team to keep procedures accurate and accessible.</li>
+                                </ul>
+                            </article>
+
+                            <article class="experience-card">
+                                <p class="card-label">Staples</p>
+                                <h3>Tech Sales Associate</h3>
+                                <p class="experience-meta">Aug 2023 - Sep 2024</p>
+                                <ul class="detail-list">
+                                    <li>Helped customers choose hardware and software based on their needs.</li>
+                                    <li>Managed stocking, floor organization, and register responsibilities.</li>
+                                </ul>
+                            </article>
+
+                            <article class="experience-card">
+                                <p class="card-label">SF Math Circle</p>
+                                <h3>Math Assistant Instructor</h3>
+                                <p class="experience-meta">Oct 2022 - Dec 2022</p>
+                                <ul class="detail-list">
+                                    <li>Facilitated remote group problem-solving sessions for students ages 6 to 13.</li>
+                                    <li>Guided students through difficult questions and encouraged collaborative learning.</li>
+                                </ul>
+                            </article>
+
+                            <article class="experience-card">
+                                <p class="card-label">Buffalo Wild Wings</p>
+                                <h3>Host &amp; Cook</h3>
+                                <p class="experience-meta">Jul 2019 - Jan 2020</p>
+                                <ul class="detail-list">
+                                    <li>Managed guest seating, takeout accuracy, and kitchen prep during service.</li>
+                                    <li>Worked closely with the team to keep hospitality and operations running smoothly.</li>
+                                </ul>
+                            </article>
+                        </div>
+                    </div>
+                </details>
+
+                <details class="resume-drawer">
+                    <summary>
+                        <span class="summary-title">Inline Resume Preview</span>
+                        <i class="fas fa-chevron-down" aria-hidden="true"></i>
                     </summary>
 
                     <div class="resume-panel">
-                        <div class="btn-row">
-                            <a href="./George%20Barrone%20Resume%202026.pdf" download="George Barrone Resume 2026.pdf" class="btn btn-primary">
-                                <i class="fas fa-download" aria-hidden="true"></i>
-                                <span>Download Resume</span>
-                            </a>
-                            <a href="./George%20Barrone%20Resume%202026.pdf" target="_blank" rel="noreferrer" class="btn">
-                                <i class="fas fa-up-right-from-square" aria-hidden="true"></i>
-                                <span>Open PDF</span>
-                            </a>
-                        </div>
-
                         <object
                             class="resume-frame"
                             data="./George%20Barrone%20Resume%202026.pdf"
@@ -330,50 +364,90 @@
         </section>
 
         <section class="view-panel" id="personal-view" data-view="personal" role="tabpanel" aria-labelledby="personal-tab" hidden>
-            <section class="personal-hero" aria-labelledby="personal-title">
-                <div class="personal-photo">
-                    <img src="aboutme.jpg" alt="George Barrone personal photo">
-                </div>
-
-                <div class="personal-story">
-                    <p class="eyebrow">Outside the terminal</p>
-                    <h2 id="personal-title">Personal About Me</h2>
-                    <p>
-                        My name is George Barrone, I am 25 years old. I have a strong passion for Films and Video Games. My favorite hobby is keeping up on new film releases weekly.
+            <section class="hero-section personal-hero" aria-labelledby="personal-title">
+                <div class="hero-copy">
+                    <p class="eyebrow">personal</p>
+                    <h2 id="personal-title">Outside The Terminal</h2>
+                    <p class="hero-lead">
+                        I am 25 years old and I spend a lot of my time keeping up with movies, new releases, and games that feel worth sinking into.
                     </p>
-                    <p>
-                        I mostly game on my Custom Built Desktop PC, mostly playing competitive FPS as well as Story Driven games. I watch plenty of movies at
-                        home but nothing can top the experience of seeing a movie whether that be old or new releases IN theaters.
+                    <p class="personal-copy">
+                        My favorite hobby is staying current with film releases every week. I mostly game on my custom-built desktop PC, playing competitive FPS titles and story-driven games, and I still think nothing beats seeing a movie in a theater.
                     </p>
 
-                    <div class="interest-tags" aria-label="Interests">
+                    <div class="interest-strip" aria-label="Interests">
                         <span><i class="fas fa-gamepad" aria-hidden="true"></i> Video Games</span>
                         <span><i class="fas fa-film" aria-hidden="true"></i> Movies</span>
                     </div>
                 </div>
+
+                <div class="hero-visual">
+                    <div class="portrait-frame portrait-frame-personal">
+                        <div class="frame-meta frame-meta-top">
+                            <span>PERSONAL_FEED</span>
+                            <span>OFF_CLOCK</span>
+                        </div>
+                        <img src="aboutme.jpg" alt="George Barrone personal photo">
+                        <div class="frame-meta frame-meta-bottom">
+                            <span>FILMS / GAMES</span>
+                            <span>THEATER_REGULAR</span>
+                        </div>
+                    </div>
+                </div>
             </section>
 
-            <section class="section-block personal-prompts" aria-labelledby="personal-prompts-title">
-                <div class="section-heading compact">
-                    <p>Interests</p>
-                    <h2 id="personal-prompts-title">Favorites</h2>
+            <section class="section-block" aria-labelledby="favorites-title">
+                <div class="section-intro section-intro-split">
+                    <div>
+                        <p class="eyebrow">favorites</p>
+                        <h2 id="favorites-title">Current Rotation</h2>
+                    </div>
+                    <p class="section-copy">
+                        A few movies and games that stay in rotation for me.
+                    </p>
                 </div>
 
-                <div class="prompt-list">
-                    <article class="prompt-row">
-                        <i class="fas fa-gamepad" aria-hidden="true"></i>
-                        <div>
-                            <h3>Games I Like</h3>
-                            <p>Fallout New Vegas, Super Smash Brothers Melee, Counter Strike</p>
+                <div class="project-grid personal-grid">
+                    <article class="project-card">
+                        <div class="project-card-header">
+                            <div class="project-badge">
+                                <i class="fas fa-gamepad" aria-hidden="true"></i>
+                            </div>
                         </div>
+                        <h3>Games I Like</h3>
+                        <div class="tag-list">
+                            <span>Competitive</span>
+                            <span>Story Driven</span>
+                        </div>
+                        <p>Fallout New Vegas, Super Smash Brothers Melee, and Counter-Strike are some of my favorite games of all time.</p>
                     </article>
 
-                    <article class="prompt-row">
-                        <i class="fas fa-film" aria-hidden="true"></i>
-                        <div>
-                            <h3>Movies I Love</h3>
-                            <p>The Big Lebowski, Lady Bird, The Worst Person in the World, Full Metal Jacket</p>
+                    <article class="project-card">
+                        <div class="project-card-header">
+                            <div class="project-badge">
+                                <i class="fas fa-film" aria-hidden="true"></i>
+                            </div>
                         </div>
+                        <h3>Movies I Love</h3>
+                        <div class="tag-list">
+                            <span>Weekly Releases</span>
+                            <span>Theaters</span>
+                        </div>
+                        <p>The Big Lebowski, Lady Bird, The Worst Person in the World, and Full Metal Jacket</p>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-card-header">
+                            <div class="project-badge">
+                                <i class="fas fa-ticket" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <h3>Ideal Reset</h3>
+                        <div class="tag-list">
+                            <span>Movies</span>
+                            <span>PC Gaming</span>
+                        </div>
+                        <p>Checking out a new movie release and winding down is pretty much my default recharge.</p>
                     </article>
                 </div>
             </section>
